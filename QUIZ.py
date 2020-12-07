@@ -31,7 +31,7 @@ man_height = man_size[1]
 man_x_pos = (screen_width - man_width) // 2 # 화면 가로의 중간에 위치
 man_y_pos = screen_height - man_height # 화면 세로의 맨 아래에 위치
 
-
+game_result = ""
 
 
 crap = pygame.image.load(os.path.join(image_path, "crap.png"))
@@ -121,11 +121,11 @@ while running:
 
     # 충돌 체크
     if man_rect.colliderect(crap_rect):
-        print("충돌!!")
+        game_result = "Game Over"
         running = False
     
     if man_rect.colliderect(crap2_rect):
-        print("충돌!!")
+        game_result = "Game Over"
         running = False
 
 
@@ -142,8 +142,11 @@ while running:
     timer = game_font.render("You've Survived " + str(int(total_time)) + " sec!!", True, (0, 0, 0)) # 출력할 글자, True, 글자색상
     
     screen.blit(timer, (10, 10))
-
+    msg = game_font.render(game_result, True, (155, 0 , 0))
+    msg_rect = msg.get_rect(center=(screen_width // 2, screen_height // 2))
+    screen.blit(msg, msg_rect)
 
     pygame.display.update()
-    
+
+pygame.time.delay(2000)
 pygame.quit()
