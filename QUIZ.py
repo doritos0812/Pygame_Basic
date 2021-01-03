@@ -1,6 +1,5 @@
 import pygame
 import random
-import os
 #################################################
 # Basic Initialization (have to)
 pygame.init() # Initialize
@@ -19,29 +18,27 @@ clock = pygame.time.Clock()
 
 # 1. User Game Initialization (BackGround, Images, Graph, Speed, Font etc..)
 
-current_path = os.path.dirname(__file__) # return current file path
-image_path = os.path.join(current_path, "Images")
 
-background = pygame.image.load(os.path.join(image_path, "Backgr.png"))
+background = pygame.image.load("C:/Users/dorit/anaconda3/data/Pygame_Example/pygame_basic/Images/Backgr.png")
 
-man = pygame.image.load(os.path.join(image_path, "man.png"))
+man = pygame.image.load("C:/Users/dorit/anaconda3/data/Pygame_Example/pygame_basic/Images/man.png")
 man_size = man.get_rect().size # load size
 man_width = man_size[0]
 man_height = man_size[1]
 man_x_pos = (screen_width - man_width) // 2 # 화면 가로의 중간에 위치
 man_y_pos = screen_height - man_height # 화면 세로의 맨 아래에 위치
 
-game_result = ""
 
 
-crap = pygame.image.load(os.path.join(image_path, "crap.png"))
+
+crap = pygame.image.load("C:/Users/dorit/anaconda3/data/Pygame_Example/pygame_basic/Images/crap.png")
 crap_size = crap.get_rect().size # load size
 crap_width = crap_size[0]
 crap_height = crap_size[1]
 crap_x_pos = random.randrange(0, (screen_width - crap_width))
 crap_y_pos = 0 # 화면 세로의 맨 아래에 위치
 
-crap2 = pygame.image.load(os.path.join(image_path, "crap.png"))
+crap2 = pygame.image.load("C:/Users/dorit/anaconda3/data/Pygame_Example/pygame_basic/Images/crap.png")
 crap2_size = crap2.get_rect().size # load size
 crap2_width = crap2_size[0]
 crap2_height = crap2_size[1]
@@ -121,11 +118,11 @@ while running:
 
     # 충돌 체크
     if man_rect.colliderect(crap_rect):
-        game_result = "Game Over"
+        print("충돌!!")
         running = False
     
     if man_rect.colliderect(crap2_rect):
-        game_result = "Game Over"
+        print("충돌!!")
         running = False
 
 
@@ -142,11 +139,8 @@ while running:
     timer = game_font.render("You've Survived " + str(int(total_time)) + " sec!!", True, (0, 0, 0)) # 출력할 글자, True, 글자색상
     
     screen.blit(timer, (10, 10))
-    msg = game_font.render(game_result, True, (155, 0 , 0))
-    msg_rect = msg.get_rect(center=(screen_width // 2, screen_height // 2))
-    screen.blit(msg, msg_rect)
+
 
     pygame.display.update()
-
-pygame.time.delay(2000)
+    
 pygame.quit()
